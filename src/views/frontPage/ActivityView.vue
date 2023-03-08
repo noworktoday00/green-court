@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row row-cols-md-4">
         <div class="p-16" v-for="product in testProducts" :key="product.id">
-            <div class="card text-white">
+            <div class="card card-opacity text-white">
               <img :src="product.imageUrl"
                    class="card-img-top"
                    alt=""
@@ -45,7 +45,7 @@
 </template>
 
 <style lang="scss">
-.card {
+.card-opacity {
   background: rgba(255, 255, 255, 0.293);
 }
 </style>

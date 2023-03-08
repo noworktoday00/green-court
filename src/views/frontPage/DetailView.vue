@@ -1,37 +1,59 @@
 <template>
   <Loading :active="isLoading" />
-  <div class="container mt-16">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <router-link class="text-white text-decoration-none" to="/activities">找球團</router-link>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">活動名稱</li>
-      </ol>
-    </nav>
-    <div class="row row-cols-md-2 justify-content-center">
-      <article class="col-md-8">
-        <h2>{{ product.title }}</h2>
-        <img :src="product.imageUrl" alt="" class="img-fluid mb-48">
-      </article>
-      <div class="col-md-4 mt-48">
-        <div>{{ product.content }}</div>
-        <div>{{ product.description }}</div>
-        <hr>
-        <div class="h5">價格 {{ product.price }}</div>
-        <div class="h6">原價 {{ product.origin_price }}</div>
-        <div class="h5">優惠價 {{ product.price }}</div>
-        <hr>
-        <button
-        class="btn btn-outline-danger"
-        @click="addToCart(product.id)"
-        :enabled="this.status.loadingItem === product.id">
-          <div class="spinner-border spinner-border-sm"
-          role="status" v-if="this.status.loadingItem === product.id">
-            <span class="visually-hidden">Loading...</span>
+  <div class="gradient-bg">
+    <div class="container text-white py-80">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <router-link class="text-white text-decoration-none" to="/activities">找球團</router-link>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">活動名稱</li>
+        </ol>
+      </nav>
+      <div class="row row-cols-md-2 justify-content-center">
+        <article class="col-md-8">
+          <img :src="product.imageUrl" alt="" class="img-fluid mb-48">
+        </article>
+        <div class="col-md-4">
+          <h2>{{ product.title }}</h2>
+          <div>{{ product.content }}</div>
+          <div class="mt-24">{{ product.description }}</div>
+          <hr>
+          <div class="h6">
+            費用：
+            <br>
+             男生：{{ product.origin_price }} / 女生：{{ product.price }}
+            </div>
+          <hr>
+          <div class="h6">
+            地點： {{ product.location }}
           </div>
-          加入購物車
-        </button>
+          <div class="h6">
+            程度：{{ product.level -1 }} ~ {{ product.level +1 }}
+          </div>
+          <div class="h6">
+            時間： {{ product.date }} / {{ product.time }}
+            <br>
+            時長：{{ product.hours }} / {{ product.unit }}
+          </div>
+          <hr>
+          <iframe :src="product.iframe"
+                  width="400" height="300"
+                  title="location"
+                  frameborder="0"
+                  style="border:0;" allowfullscreen=""
+                  aria-hidden="false" tabindex="0"></iframe>
+          <button
+          class="btn btn-outline-light"
+          @click="addToCart(product.id)"
+          :enabled="this.status.loadingItem === product.id">
+            <div class="spinner-border spinner-border-sm"
+            role="status" v-if="this.status.loadingItem === product.id">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            我要參加！
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -56,6 +78,7 @@ export default {
       this.$http.get(api)
         .then((res) => {
           this.product = res.data.product;
+          console.log(this.product);
           this.isLoading = false;
         });
     },

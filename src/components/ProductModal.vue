@@ -78,6 +78,7 @@
         </div>
         </div>
         <div class="col-sm-8">
+          <!-- 標題 & 分類 -->
           <div class="row gx-2">
             <div class="mb-16 col-md-6">
               <label for="title" class="form-label">標題</label>
@@ -98,6 +99,7 @@
             </div>
           </div>
           <hr>
+          <!-- 日期 & 時間 -->
           <div class="row gx-2">
             <div class="mb-16 col-md-6">
               <label for="date" class="form-label">日期</label>
@@ -113,6 +115,7 @@
             </div>
           </div>
           <hr>
+          <!-- 地點 & 地圖 -->
           <div class="row gx-2">
             <div class="mb-16 col-md-6">
               <label class="form-label" for="location">地點</label>
@@ -128,6 +131,7 @@
             </div>
           </div>
           <hr>
+          <!-- 單位 & 時數 -->
           <div class="row gx-2">
             <div class="mb-16 col-md-6">
               <label class="form-label" for="unit">單位</label>
@@ -143,6 +147,7 @@
             </div>
           </div>
           <hr>
+          <!-- 場地數 & 名額 -->
           <div class="row gx-2">
             <div class="mb-16 col-md-6">
               <label class="form-label" for="court">場地數</label>
@@ -158,6 +163,7 @@
             </div>
           </div>
           <hr>
+          <!-- 年資 & 等級 -->
           <div class="row gx-2">
             <div class="mb-16 col-md-6">
               <label class="form-label" for="experience">年資</label>
@@ -191,6 +197,7 @@
             </div>
           </div>
           <hr>
+          <!-- 原價 & 售價 -->
           <div class="row gx-2">
             <div class="mb-16 col-md-6">
               <label for="origin_price" class="form-label">原價</label>

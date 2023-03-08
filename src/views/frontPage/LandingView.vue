@@ -48,8 +48,10 @@
           <div class="row justify-content-center">
             <div class="col-10 group-card row row-cols-1 row-cols-md-3">
               <div class="p-24 p-md-8" v-for="item in activitiesSelect" :key="item.id">
-                <div class="card text-white">
-                <img :src="item.imageUrl" class="card-img-top" alt="">
+                <div class="card card-opacity text-white">
+                <img :src="item.imageUrl"
+                     class="card-img-top" alt=""
+                     style="height:250px;background-size:cover">
                 <div class="card-body">
                   <h5 class="card-title">{{item.title}}</h5>
                   <ul class="card-text list-unstyled">
@@ -60,7 +62,9 @@
                     <li>名額: {{ item.members }}</li>
                     <li>場地數</li>
                   </ul>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <a href="#" class="btn btn-primary" @click.prevent="showDetail(item.id)">
+                    Go somewhere
+                  </a>
                 </div>
               </div>
               </div>
@@ -83,19 +87,27 @@
           </p>
           <div class="coach-card row row-cols-1 row-cols-md-2">
             <div class="p-24 p-md-8" v-for="item in coachesSelect" :key="item.id">
-              <div class="row g-0 bg-light position-relative">
-                <div class="col-md-6 mb-md-0 p-md-4">
-                  <img :src="item.imageUrl" class="w-100" alt="">
+              <div class="card-opacity text-white rounded row g-0 position-relative">
+                <div class="col-md-6 mb-md-0 p-md-8">
+                  <img :src="item.imageUrl"
+                       class="img-fluid" alt=""
+                       style="height:200px;background-size:cover">
                 </div>
-                <div class="col-md-6 p-4 ps-md-0">
-                  <h5 class="mt-0">Columns with stretched link</h5>
-                  <ul>
-                    <li>年資</li>
-                    <li>時間</li>
-                    <li>地點</li>
-                    <li>教學項目</li>
+                <div class="col-md-6 p-4 ps-md-4 pt-16">
+                  <h5 class="mt-0">{{ item.title }}</h5>
+                  <ul class="list-unstyled">
+                    <li>年資: {{ item.experience }}</li>
+                    <li>時間: {{ item.date }} {{ item.time }}</li>
+                    <li>地點: {{ item.location }}</li>
+                    <li>
+                      教學項目:
+                      <br>
+                      {{ item.content }}
+                    </li>
                   </ul>
-                  <a href="#" class="stretched-link">Go somewhere</a>
+                  <a href="#" class="text-white" @click.prevent="showDetail(item.id)">
+                    Go somewhere
+                  </a>
                 </div>
               </div>
             </div>
@@ -125,7 +137,9 @@
                   <li class="fs-4">球拍品牌</li>
                   <li class="fs-3">球拍價格</li>
                 </ul>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" alt="" class="btn btn-primary" @click.prevent="showDetail(item.id)">
+                  Go somewhere
+                </a>
               </div>
             </div>
           </div>
@@ -186,15 +200,15 @@ export default {
               this.rackets.push(item);
             }
           });
-          this.activitiesSelect = this.activities.slice(2);
-          this.coachesSelect = this.coaches.slice(3);
-          this.recketsSelect = this.rackets.slice(4);
-          console.log(this.activitiesSelect);
+          this.activitiesSelect = this.activities.slice(0, 3);
+          this.coachesSelect = this.coaches.slice(0, 4);
+          this.recketsSelect = this.rackets.slice(0, 5);
           this.isLoading = false;
         });
     },
     showDetail(id) {
-      this.$router.push(`/activities/${id}`);
+      const newPath = this.$route.path.replace('/landing', `/activities/${id}`);
+      this.$router.push(newPath);
     },
   },
   mounted() {
