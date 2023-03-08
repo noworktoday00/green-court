@@ -1,19 +1,82 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
+    component: () => import('../views/frontPage/HomeView.vue'),
+    children: [
+      {
+        path: '/landing',
+        name: 'landing',
+        component: () => import('../views/frontPage/LandingView.vue'),
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: () => import('../views/frontPage/AboutView.vue'),
+      },
+      {
+        path: '/level',
+        name: 'level',
+        component: () => import('../views/frontPage/LevelView.vue'),
+      },
+      {
+        path: '/activities',
+        name: 'activities',
+        component: () => import('../views/frontPage/ActivityView.vue'),
+      },
+      {
+        path: '/coach',
+        name: 'coach',
+        component: () => import('../views/frontPage/CoachView.vue'),
+      },
+      {
+        path: '/racket',
+        name: 'racket',
+        component: () => import('../views/frontPage/RacketView.vue'),
+      },
+      {
+        path: '/activities/:productId',
+        component: () => import('../views/frontPage/DetailView.vue'),
+      },
+      {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('../views/frontPage/CartView.vue'),
+      },
+      {
+        path: '/order/:orderId',
+        component: () => import('../views/frontPage/CheckOrder.vue'),
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue'),
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/dashboard/DashboardView.vue'),
+    children: [
+      {
+        path: 'products',
+        name: 'products',
+        component: () => import('../views/dashboard/ProductsView.vue'),
+      },
+      {
+        path: 'orders',
+        name: 'orders',
+        component: () => import('../views/dashboard/OrderView.vue'),
+      },
+      {
+        path: 'coupons',
+        name: 'coupons',
+        component: () => import('../views/dashboard/CouponView.vue'),
+      },
+    ],
   },
 ];
 

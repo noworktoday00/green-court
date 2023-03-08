@@ -1,30 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view/>
+  <UserFooter />
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "./assets/all.scss";
+
+.gradient-bg {
+  background-image: url('@/assets/bannerBG.png');
+  background-size: cover;
+  width: 100%;
+  background-repeat: no-repeat;
 }
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.card {
+  background: rgba(255, 255, 255, 0.293);
 }
 </style>
+
+<script>
+import UserFooter from '@/components/UserFooter.vue';
+
+export default {
+  components: {
+    UserFooter,
+  },
+};
+</script>

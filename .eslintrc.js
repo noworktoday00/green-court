@@ -13,5 +13,8 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'vuejs-accessibility/label-has-for': 'off',
+    'jsx-a11y/label-has-axxociated-control': 'off',
+    'vue/multi-word-component-names': 'off',
   },
 };
