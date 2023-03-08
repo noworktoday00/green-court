@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkgreen_court"]=self["webpackChunkgreen_court"]||[]).push([[941],{6941:function(e,t,n){n.r(t),n.d(t,{default:function(){return f}});var r=n(3396);const s={class:"gradient-bg"},c=(0,r._)("div",{class:"container py-80"},[(0,r._)("h2",{class:"text-white mb-0"}," this is about page ")],-1),a=[c];function u(e,t,n,c,u,i){return(0,r.wg)(),(0,r.iD)("div",s,a)}var i={},o=n(89);const d=(0,o.Z)(i,[["render",u]]);var f=d}}]);
+//# sourceMappingURL=941.303f821c.js.map
