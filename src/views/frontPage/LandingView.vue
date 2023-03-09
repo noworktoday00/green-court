@@ -207,8 +207,7 @@ export default {
         });
     },
     showDetail(id) {
-      const newPath = this.$route.path.replace('/landing', `/activities/${id}`);
-      this.$router.push(newPath);
+      this.$router.push(`/activities/${id}`);
     },
   },
   mounted() {
