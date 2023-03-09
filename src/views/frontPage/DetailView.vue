@@ -3,7 +3,7 @@
   <div class="gradient-bg">
     <div class="container text-white py-80">
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb my-24">
           <li class="breadcrumb-item">
             <router-link class="text-white text-decoration-none" to="/activities">找球團</router-link>
           </li>
@@ -12,7 +12,7 @@
       </nav>
       <div class="row row-cols-md-2 justify-content-center">
         <article class="col-md-8">
-          <img :src="product.imageUrl" alt="" class="img-fluid mb-48">
+          <img :src="product.imageUrl" alt="" class="img-fluid mb-24">
         </article>
         <div class="col-md-4">
           <h2>{{ product.title }}</h2>
