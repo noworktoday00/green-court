@@ -1,14 +1,16 @@
 <template>
   <Loading :active="isLoading" />
+  <div class="container-fluid px-0">
+    <div class="page-banner"></div>
+  </div>
   <div class="gradient-bg">
     <div class="container">
       <div class="row row-cols-md-4">
         <div class="p-16" v-for="product in testProducts" :key="product.id">
             <div class="card card-opacity text-white">
-              <img :src="product.imageUrl"
-                   class="card-img-top"
-                   alt=""
-                   style="height:200px;background-size:cover ">
+              <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
+                     class="card-img-top" alt=""
+                     style="height:250px;background-size:cover"></div>
               <div class="card-body">
                 <h5 class="card-title"> {{ product.title }} </h5>
                 <ul class="list-unstyled">
@@ -45,8 +47,11 @@
 </template>
 
 <style lang="scss">
-.card-opacity {
-  background: rgba(255, 255, 255, 0.293);
+.page-banner {
+  background-image: url('@/assets/group_add_FILL0_wght400_GRAD0_opsz48.jpeg');
+  background-size: cover ;
+  background-position: center center;
+  height: 240px;
 }
 </style>
 

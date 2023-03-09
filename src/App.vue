@@ -9,10 +9,11 @@
 .gradient-bg {
   background-image: url('@/assets/bannerBG.png');
   background-size: cover;
+  background-attachment: fixed;
   width: 100%;
   background-repeat: no-repeat;
 }
-.card {
+.card-opacity {
   background: rgba(255, 255, 255, 0.293);
 }
 </style>

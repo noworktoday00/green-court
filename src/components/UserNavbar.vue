@@ -5,7 +5,7 @@
                 rounded-3
                 mt-24">
     <div class="container d-flex justify-content-between">
-        <router-link class="navbar-brand" to="/landing">
+        <router-link class="navbar-brand" to="/">
           <h1 class="head-logo ms-16 ms-md-48 mb-0">Green-court</h1>
         </router-link>
       <button
