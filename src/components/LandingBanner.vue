@@ -28,7 +28,7 @@
               <img src="@/assets/badminton-line.svg" class="img-fluid"
                    alt="">
             </div>
-            <div class="banner-right-player" data-aos="fade-up-right" data-aos-duration="2000">
+            <div class="banner-right-player" data-aos="fade-up-right" data-aos-duration="3000">
               <img src="@/assets/wp2094182-scaled-png.png" class="img-fluid"
                    alt="">
             </div>

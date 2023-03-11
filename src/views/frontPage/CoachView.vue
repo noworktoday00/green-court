@@ -7,13 +7,13 @@
     <div class="container">
       <div class="row row-cols-md-4">
         <div class="p-16" v-for="product in testProducts" :key="product.id">
-            <div class="card text-white">
+            <div class="card card-opacity text-white">
               <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
                      class="card-img-top" alt=""
                      style="height:250px;background-size:cover"></div>
               <div class="card-body">
                 <h5 class="card-title"> {{ product.title }} </h5>
-                <ul>
+                <ul class="list-unstyled">
                   <li>時間：{{ product.time }} {{  product.unit}}</li>
                   <li>地點：{{ product.location }}</li>
                   <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>

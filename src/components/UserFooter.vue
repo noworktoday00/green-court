@@ -35,7 +35,7 @@
                 </router-link>
               </li>
               <li class="mb-32 text-center">
-                <router-link class="text-white text-decoration-none" to="/landing">
+                <router-link class="text-white text-decoration-none" to="/">
                   <p class="link">
                     程度量表
                   </p>

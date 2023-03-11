@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading" />
   <LandingBanner />
   <div class="container-fluid">
     <div class="row row-cols-md-2 align-items-center">
@@ -50,21 +51,38 @@
               <div class="p-24 p-md-8" v-for="item in activitiesSelect" :key="item.id">
                 <div class="card card-opacity text-white">
                 <div :style="{backgroundImage: 'url(' + item.imageUrl + ')'}"
-                     class="card-img-top" alt=""
-                     style="height:250px;background-size:cover"></div>
-                <div class="card-body">
-                  <h5 class="card-title">{{item.title}}</h5>
-                  <ul class="card-text list-unstyled">
-                    <li>{{item.location}}</li>
-                    <li>合適等級: {{ item.level -1 }} ~ {{ item.level +1 }}</li>
-                    <li>費用: {{ item.price }}</li>
-                    <li>時間: {{ item.time }}</li>
-                    <li>名額: {{ item.members }}</li>
-                    <li>場地數</li>
+                     class="card-img-top card-image" alt="">
+                     <div class="d-flex mx-auto justify-content-between pt-8 px-24">
+                        <p class="fs-4 text-white">
+                           Lv. {{ item.level }}
+                        </p>
+                        <i class="fs-4 bi bi-star text-white"></i>
+                     </div>
+                </div>
+                <div class="card-body pt-16">
+                  <h4 class="card-title text-center">{{item.title}}</h4>
+                  <hr>
+                  <h5 class="text-center">{{item.location}}</h5>
+                  <ul class="card-text list-unstyled mt-4">
+                    <li>合適等級: Lv{{ item.level -1 }} ~ Lv{{ item.level +1 }}</li>
+                    <li class="mt-8">費用:
+                        <br>
+                        男：{{ item.origin_price }}元 / 女：{{ item.price }}元</li>
+                    <li class="mt-8">
+                      時間:
+                      <br class="d-block d-md-none">
+                      {{ item.date }} / {{ item.time }}  ({{ item.hours }}小時)
+                    </li>
+                    <li class="mt-8">名額: {{ item.members }} 人</li>
+                    <li>場地數： {{ item.court }} 面</li>
                   </ul>
-                  <a href="#" class="btn btn-primary" @click.prevent="showDetail(item.id)">
-                    查看球團資料
-                  </a>
+                  <div class="d-grid gap-2">
+                    <a href="#"
+                       class="btn btn-outline-primary"
+                       @click.prevent="showDetail(item.id)">
+                      查看球團資料
+                    </a>
+                  </div>
                 </div>
               </div>
               </div>
@@ -88,14 +106,15 @@
           <div class="coach-card row row-cols-1 row-cols-md-2">
             <div class="p-24 p-md-8" v-for="item in coachesSelect" :key="item.id">
               <div class="card-opacity text-white rounded row g-0 position-relative">
-                <div class="col-md-6 mb-md-0 p-md-8">
+                <div class="col-md-6 mb-md-0 p-0">
                   <div :style="{backgroundImage: 'url(' + item.imageUrl + ')'}"
-                     class="card-img-top" alt=""
-                     style="height:250px;background-size:cover"></div>
+                       class="rounded-start"
+                       alt=""
+                       style="height:250px;background-size:cover"></div>
                 </div>
-                <div class="col-md-6 p-4 ps-md-4 pt-16">
-                  <h5 class="mt-0">{{ item.title }}</h5>
-                  <ul class="list-unstyled">
+                <div class="col-md-6 ps-md-4 py-16 d-flex flex-column justify-content-between">
+                  <h5 class="mt-0 ps-24">{{ item.title }}</h5>
+                  <ul class="list-unstyled ps-24">
                     <li>年資: {{ item.experience }}</li>
                     <li>時間: {{ item.date }} {{ item.time }}</li>
                     <li>地點: {{ item.location }}</li>
@@ -105,9 +124,10 @@
                       {{ item.content }}
                     </li>
                   </ul>
-                  <a href="#" class="text-white" @click.prevent="showDetail(item.id)">
-                    了解教練資訊
-                  </a>
+                    <a href="#" class="text-white text-end pe-16"
+                       @click.prevent="showDetail(item.id)">
+                      了解教練資訊
+                    </a>
                 </div>
               </div>
             </div>
@@ -162,6 +182,10 @@
     background-size: 105%;
     }
 }
+.card-image {
+  height:200px;
+  background-size:cover;
+}
 </style>
 
 <script>
@@ -181,6 +205,7 @@ export default {
       coachesSelect: [],
       rackets: [],
       recketsSelect: [],
+      isLoading: false,
     };
   },
   methods: {
@@ -204,6 +229,7 @@ export default {
           this.coachesSelect = this.coaches.slice(0, 4);
           this.recketsSelect = this.rackets.slice(0, 5);
           this.isLoading = false;
+          console.log(this.activitiesSelect);
         });
     },
     showDetail(id) {
