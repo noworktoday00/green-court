@@ -1,8 +1,6 @@
 <template>
   <Loading :active="isLoading" />
-  <div class="container-fluid px-0">
-    <div class="page-banner"></div>
-  </div>
+  <ProductBanner />
   <div class="gradient-bg">
     <div class="container">
       <div class="row row-cols-md-4">
@@ -46,18 +44,13 @@
   </div>
 </template>
 
-<style lang="scss">
-.page-banner {
-  background-image: url('@/assets/group_add_FILL0_wght400_GRAD0_opsz48.jpeg');
-  background-size: cover ;
-  background-position: center center;
-  height: 240px;
-}
-</style>
-
 <script>
+import ProductBanner from '@/components/ProductBanner.vue';
 
 export default {
+  components: {
+    ProductBanner,
+  },
   data() {
     return {
       products: [],

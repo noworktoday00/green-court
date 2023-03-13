@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading" />
   <div class="gradient-bg">
     <div class="container-fluid pt-80 text-white">
       <div class="row mt-48 justify-content-center">

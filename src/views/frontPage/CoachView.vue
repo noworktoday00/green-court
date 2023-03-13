@@ -1,8 +1,6 @@
 <template>
   <Loading :active="isLoading" />
-  <div class="container-fluid px-0">
-    <div class="page-banner"></div>
-  </div>
+  <ProductBanner />
   <div class="gradient-bg">
     <div class="container">
       <div class="row row-cols-md-4">
@@ -47,7 +45,12 @@
 </template>
 
 <script>
+import ProductBanner from '@/components/ProductBanner.vue';
+
 export default {
+  components: {
+    ProductBanner,
+  },
   data() {
     return {
       products: [],

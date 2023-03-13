@@ -37,7 +37,7 @@
               aria-expanded="false">
               看活動
             </a>
-            <ul class="dropdown-menu border-white mt-md-16" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu mt-md-16" aria-labelledby="navbarDropdown">
               <li class="dropdown-item">
                 <router-link class="nav-item text-light link" to="/activities">
                   <i class="bi bi-people-fill me-4"></i>找球團
@@ -108,10 +108,10 @@ aria-labelledby="offcanvasExampleLabel">
 
 <style lang="scss">
 .navbar {
-  background: rgba(255, 255, 255, 0.4);
-  &:hover{
-    background: rgba(0, 0, 0, 0.4);
-  }
+  background: rgba(0, 0, 0, 0.7);
+}
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28255, 255, 255, 0.7%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e');
 }
 .head-logo {
   background-image: url('@/assets/green-court-logo.svg');
