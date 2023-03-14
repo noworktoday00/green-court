@@ -2,7 +2,47 @@
   <Loading :active="isLoading" />
   <ProductBanner />
   <div class="gradient-bg">
-    <div class="container">
+    <div class="container py-24">
+      <div v-if="!levelMatchProducts.length == 0">
+        <p class="fs-3 text-white text-center">等級媒合球團</p>
+        <div class="row row-cols-md-4">
+          <div class="p-16" v-for="product in levelMatchProducts" :key="product.id">
+              <div class="card card-opacity text-white">
+                <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
+                       class="card-img-top" alt=""
+                       style="height:250px;background-size:cover"></div>
+                <div class="card-body">
+                  <h5 class="card-title"> {{ product.title }} </h5>
+                  <ul class="list-unstyled">
+                    <li>時間：{{ product.time }} {{  product.unit}}</li>
+                    <li>地點：{{ product.location }}</li>
+                    <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>
+                    <li>費用： {{ product.price }}</li>
+                  </ul>
+                  <div class="row">
+                    <div class="btn-group">
+                      <button
+                      class="btn btn-outline-primary"
+                      @click="showDetail(product.id)">
+                      查看更多
+                    </button>
+                      <button
+                      class="btn btn-outline-secondary"
+                      @click="addToCart(product.id)"
+                      :disabled="this.status.loadingItem === product.id">
+                      <div class="spinner-border spinner-border-sm"
+                      role="status" v-if="this.status.loadingItem === product.id">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                      參加球團
+                    </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
       <div class="row row-cols-md-4">
         <div class="p-16" v-for="product in testProducts" :key="product.id">
             <div class="card card-opacity text-white">
@@ -56,6 +96,8 @@ export default {
       products: [],
       testProducts: [],
       product: {},
+      level: 0,
+      levelMatchProducts: [],
       isLoading: false,
       status: {
         loadingItem: '',
@@ -74,9 +116,19 @@ export default {
               this.testProducts.push(item);
               console.log(this.testProducts);
             }
+            if (this.level === item.level + 1 || this.level === item.level - 1) {
+              if (item.category === '教練課') {
+                this.levelMatchProducts.push(item);
+              }
+            }
           });
           this.isLoading = false;
         });
+    },
+    getLevel() {
+      const levelStr = localStorage.getItem('level');
+      this.level = parseInt(levelStr, 10);
+      console.log(this.level);
     },
     showDetail(id) {
       this.$router.push(`/activities/${id}`);
@@ -98,6 +150,7 @@ export default {
   },
   created() {
     this.getProducts();
+    this.getLevel();
   },
 };
 </script>

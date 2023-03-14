@@ -20,7 +20,7 @@
               也歡迎您到我們的商城，尋找適合自己的球具。
             </h6>
             <div class="mt-48 text-center text-md-start">
-              <router-link to="/activities" class="btn btn-outline-light px-80">開始尋找球團</router-link>
+              <router-link to="/level" class="btn btn-outline-light px-80">開始等級測驗</router-link>
             </div>
         </div>
           <div class="col banner-right order-first order-md-last mt-80">

@@ -55,9 +55,9 @@
               <i class="bi bi-cart3 me-4"></i>找球具
             </router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item me-16">
             <router-link class="nav-link text-white link" to="/cart">
-              購物車
+              <i class="bi bi-bag-check text-white"></i>
             </router-link>
             <!-- <a
             class="nav-link"
@@ -67,6 +67,15 @@
             aria-controls="offcanvasExample">
               查看購物車
             </a> -->
+          </li>
+          <li class="nav-item">
+            <!-- <router-link to="/level"
+                              class="nav-link text-white border border-white rounded px-16">
+              測試一下
+            </router-link> -->
+            <div class="nav-link text-white border border-white rounded px-16">
+              Lv.{{ level }}
+            </div>
           </li>
         </ul>
       </div>
@@ -132,3 +141,15 @@ aria-labelledby="offcanvasExampleLabel">
   }
 }
 </style>
+
+<script>
+export default {
+  data() {
+    return {
+      level: 0,
+    };
+  },
+  methods: {
+  },
+};
+</script>

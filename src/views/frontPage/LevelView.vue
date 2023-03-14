@@ -107,9 +107,10 @@
       </div>
       <div class="modal-footer">
         <button type="button"
-                      class="btn btn-outline-light"
-                      data-bs-dismiss="modal"
-                      aria-label="Close">結束測驗</button>
+                class="btn btn-outline-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                @click="getLevel()">結束測驗</button>
       </div>
     </div>
   </div>
@@ -131,6 +132,7 @@ export default {
       scoreCount: [],
       totalScore: 0,
       resultInfo: {},
+      level: 0,
       // 題庫
       quizModalData: [
         {
@@ -770,60 +772,91 @@ export default {
       if (this.totalScore === 18) {
         const result = this.resultData[0];
         this.resultInfo = result;
+        const level = 1;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 18 && this.totalScore <= 25) {
         const result = this.resultData[1];
         this.resultInfo = result;
+        const level = 2;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 26 && this.totalScore <= 32) {
         const result = this.resultData[2];
         this.resultInfo = result;
+        const level = 3;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 33 && this.totalScore <= 39) {
         const result = this.resultData[3];
         this.resultInfo = result;
+        const level = 4;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 40 && this.totalScore <= 46) {
         const result = this.resultData[4];
         this.resultInfo = result;
+        const level = 5;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 47 && this.totalScore <= 53) {
         const result = this.resultData[5];
         this.resultInfo = result;
+        const level = 6;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 54 && this.totalScore <= 60) {
         const result = this.resultData[6];
         this.resultInfo = result;
+        const level = 7;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 61 && this.totalScore <= 67) {
         const result = this.resultData[7];
         this.resultInfo = result;
+        const level = 8;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 68 && this.totalScore <= 75) {
         const result = this.resultData[8];
         this.resultInfo = result;
+        const level = 9;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 76 && this.totalScore <= 82) {
         const result = this.resultData[9];
         this.resultInfo = result;
+        const level = 10;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 83 && this.totalScore <= 89) {
         const result = this.resultData[10];
         this.resultInfo = result;
+        const level = 11;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 90 && this.totalScore <= 96) {
         const result = this.resultData[11];
         this.resultInfo = result;
+        const level = 12;
+        localStorage.setItem('level', level.toString());
       }
       if (this.totalScore > 97 && this.totalScore <= 106) {
         const result = this.resultData[12];
         this.resultInfo = result;
+        const level = 13;
+        localStorage.setItem('level', level.toString());
       }
       this.scoreCount = [];
     },
     popScore() {
       this.scoreCount.pop();
       console.log(this.scoreCount);
+    },
+    getLevel() {
+      const levelStr = localStorage.getItem('level');
+      this.level = parseInt(levelStr, 10);
+      console.log(this.level);
     },
   },
 };
