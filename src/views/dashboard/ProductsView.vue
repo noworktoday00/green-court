@@ -3,7 +3,7 @@
   <div class="gradient-bg">
     <div class="text-end">
       <button
-      class="btn btn-primary"
+      class="btn btn-outline-light"
       type="button"
       @click="openModal(true)">增加一個產品</button>
     </div>
@@ -29,13 +29,13 @@
             {{ $filters.currency(product.price) }}
           </td>
           <td>
-            <span v-if="product.is_enabled" class="text-success">啟用</span>
-            <span v-else class="text-danger">未啟用</span>
+            <span v-if="product.is_enabled" class="text-light">啟用</span>
+            <span v-else class="text-warning">未啟用</span>
           </td>
           <td>
             <div class="btn-group">
               <button
-              class="btn btn-outline-primary btn-sm"
+              class="btn btn-outline-light btn-sm"
               @click="openModal(false,product)">編輯</button>
               <button
               class="btn btn-outline-danger btn-sm"
@@ -102,7 +102,7 @@ export default {
       }
       this.isNew = isNew;
       // 用 $refs 把 productModal 綁進來
-      const productComponent = this.$refs.productModal;
+      const { productComponent } = this.$refs.productModal;
       // 執行內層函式
       productComponent.showModal();
     },

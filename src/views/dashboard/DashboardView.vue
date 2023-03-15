@@ -1,23 +1,24 @@
 <template>
   <Navbar />
+  <ProductBanner />
   <div class="gradient-bg">
-    <div class="container-fluid mt-48">
+    <div class="container-fluid py-48">
       <div class="row">
         <div class="col-2">
-          <ul class="list-group mt-48">
-            <li class="list-group-item">
+          <ul class="list-group mt-48 bg-dark text-white">
+            <li class="list-group-item bg-dark">
               <router-link
-              class="nav-item d-block text-dark text-decoration-none"
+              class="nav-item d-block text-white text-decoration-none"
               to="/dashboard/products">產品列表</router-link>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item bg-dark">
               <router-link
-              class="nav-item d-block  text-dark text-decoration-none"
+              class="nav-item d-block  text-white text-decoration-none"
               to="/dashboard/orders">訂單列表</router-link>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item bg-dark">
               <router-link
-              class="nav-item d-block text-dark text-decoration-none"
+              class="nav-item d-block text-white text-decoration-none"
               to="/dashboard/coupons">優惠券列表</router-link>
             </li>
           </ul>
@@ -32,13 +33,15 @@
 </template>
 
 <script>
-import Navbar from '@/components/NavbarComponent.vue';
+import Navbar from '@/components/DashboardNavbar.vue';
+import ProductBanner from '@/components/ProductBanner.vue';
 import ToastMessages from '@/components/ToastMessages.vue';
 import emitter from '@/methods/emitter';
 
 export default {
   components: {
     Navbar,
+    ProductBanner,
     ToastMessages,
   },
   provide() {

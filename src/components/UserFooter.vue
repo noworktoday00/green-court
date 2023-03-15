@@ -2,12 +2,12 @@
     <footer class="bg-primary">
     <div class="container">
       <div class="row justify-content-between pt-80 pb-48">
-        <div class="col-12 col-md-2 d-none d-md-block">
+        <router-link to="/" class="col-12 col-md-2 d-none d-md-block">
           <img src="@/assets/green-court-logo.svg"
                class="img-fluid mx-auto d-block mb-24" alt="">
           <img src="@/assets/green-court-logo-circle.svg"
                class="img-fluid mx-auto d-block" style="width:200px ;" alt="">
-        </div>
+        </router-link>
         <div class="col-12 col-md-8 row justify-content-center p-0">
           <div class="row row-cols-3 justify-content-between mb-48">
             <ul class="col">

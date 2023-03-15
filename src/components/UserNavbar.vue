@@ -15,7 +15,10 @@
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <div class="nav-link text-white border border-white rounded px-16 py-8">
+              Lv.{{ level }}
+            </div>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-8 mb-lg-0 ms-auto me-32">
@@ -56,24 +59,20 @@
             </router-link>
           </li>
           <li class="nav-item me-16">
-            <router-link class="nav-link text-white link" to="/cart">
-              <i class="bi bi-bag-check text-white"></i>
-            </router-link>
-            <!-- <a
+            <!-- <router-link class="nav-link text-white link" to="/cart">
+              <i class="bi bi-calendar2-week"></i>
+            </router-link> -->
+            <a
             class="nav-link"
             data-bs-toggle="offcanvas"
             href="#offcanvasExample"
             role="button"
             aria-controls="offcanvasExample">
-              查看購物車
-            </a> -->
+            <i class="bi bi-calendar2-week text-white"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <!-- <router-link to="/level"
-                              class="nav-link text-white border border-white rounded px-16">
-              測試一下
-            </router-link> -->
-            <div class="nav-link text-white border border-white rounded px-16">
+            <div class="nav-link text-white border border-white rounded px-16 d-none d-md-block">
               Lv.{{ level }}
             </div>
           </li>
@@ -82,37 +81,7 @@
     </div>
   </nav>
   </div>
-<!-- <div
-class="offcanvas offcanvas-start"
-tabindex="-1" id="offcanvasExample"
-aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button"
-    class="btn-close text-reset"
-    data-bs-dismiss="offcanvas"
-    aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen.
-       Like, text, images, lists, etc.
-    </div>
-    <div class="dropdown mt-3">
-      <button
-      class="btn btn-secondary dropdown-toggle"
-      type="button" id="dropdownMenuButton"
-      data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-</div> -->
+  <NavbarCanvas ref="offCanvas"/>
 </template>
 
 <style lang="scss">
@@ -143,9 +112,13 @@ aria-labelledby="offcanvasExampleLabel">
 </style>
 
 <script>
+import NavbarCanvas from '@/components/NavbarCanvas.vue';
 import emitter from '@/methods/emitter';
 
 export default {
+  components: {
+    NavbarCanvas,
+  },
   data() {
     return {
       level: 0,
@@ -153,8 +126,13 @@ export default {
   },
   methods: {
     getLevel() {
-      console.log(localStorage.level);
       this.level = localStorage.level;
+    },
+    showCanvas() {
+      // 用 $refs 把 offConvas 綁進來
+      const { offCanvas } = this.$refs.offCanvas;
+      // 執行內層函式
+      offCanvas.showCanvas();
     },
   },
   mounted() {

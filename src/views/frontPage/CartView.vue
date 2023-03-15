@@ -167,7 +167,6 @@ export default {
         .then((res) => {
           this.isLoading = false;
           this.carts = res.data.data;
-          console.log(this.carts);
           this.final_total = res.data.data.final_total;
           this.total = res.data.data.total;
         });
