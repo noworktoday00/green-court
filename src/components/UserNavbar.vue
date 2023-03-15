@@ -143,6 +143,8 @@ aria-labelledby="offcanvasExampleLabel">
 </style>
 
 <script>
+import emitter from '@/methods/emitter';
+
 export default {
   data() {
     return {
@@ -150,6 +152,16 @@ export default {
     };
   },
   methods: {
+    getLevel() {
+      console.log(localStorage.level);
+      this.level = localStorage.level;
+    },
+  },
+  mounted() {
+    this.getLevel();
+    emitter.on('get-level', () => {
+      this.getLevel();
+    });
   },
 };
 </script>

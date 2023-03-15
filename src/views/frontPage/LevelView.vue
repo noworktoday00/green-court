@@ -121,6 +121,7 @@
 
 <script>
 import ProductBanner from '@/components/ProductBanner.vue';
+import emitter from '@/methods/emitter';
 
 export default {
   components: {
@@ -857,6 +858,7 @@ export default {
       const levelStr = localStorage.getItem('level');
       this.level = parseInt(levelStr, 10);
       console.log(this.level);
+      emitter.emit('get-level');
     },
   },
 };
