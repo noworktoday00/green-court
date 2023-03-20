@@ -74,7 +74,7 @@
           <li class="nav-item">
             <div v-if="!level"
               class="nav-link text-white border border-white rounded px-16 d-none d-md-block">
-              <router-link to="/level">前往測驗</router-link>
+              <router-link to="/level" class="text-white text-decoration-none">前往測驗</router-link>
             </div>
             <div v-else
               class="nav-link text-white border border-white rounded px-16 d-none d-md-block">
