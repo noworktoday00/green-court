@@ -1,5 +1,6 @@
 <template>
   <Loading :active="isLoading" />
+  <ProductBanner />
   <div class="gradient-bg">
     <div class="container">
       <div class="row row-cols-md-2">
@@ -44,7 +45,7 @@
                   </td>
                   <td>
                     <button
-                    class="btn btn-outline-white p-8"
+                    class="btn btn-outline-light"
                     @click="removeCartItem(item.id)">
                       <i class="bi bi-trash3"></i>
                     </button>
@@ -137,7 +138,12 @@
 </template>
 
 <script>
+import ProductBanner from '@/components/ProductBanner.vue';
+
 export default {
+  components: {
+    ProductBanner,
+  },
   data() {
     return {
       carts: {},

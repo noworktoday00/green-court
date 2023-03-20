@@ -30,11 +30,11 @@
       <div class="modal fade"
            :id="item.id" aria-hidden="true"
            :aria-labelledby="item.id" tabindex="-1"
-           v-for="item in quizModalData" :key="item.id">
+           v-for=" (item, index) in quizModalData" :key="item.id">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content gradient-bg text-white">
             <div class="modal-header">
-              <h5 class="modal-title" :id="item.id">{{ item.title }}</h5>
+              <h5 class="modal-title" :id="item.id"> 第 {{ index + 1}} / 18 題</h5>
               <a href="#" data-bs-dismiss="modal" aria-label="Close">
                 <i class="bi bi-x fs-3 text-white"></i>
               </a>
@@ -43,17 +43,21 @@
             <div class="modal-body px-48">
               {{ item.quiz }}
               <ul class="list-unstyled mt-24" v-for="option in item.option" :key="option.value + 1">
-                <li class="d-flex">
-                  <input class="form-check-input"
-                         type="radio"
-                         :name="item.id"
-                         :id="option.name"
-                         :value="option.value"
-                         v-model="tempScore">
-                  <label class=" ms-16 form-check-label"
-                         :for="option.name">
-                    {{ option.text }}
-                  </label>
+                <li class="row">
+                  <div class="col-1">
+                    <input class="form-check-input"
+                           type="radio"
+                           :name="item.id"
+                           :id="'radio_' + option.name"
+                           :value="option.value"
+                           v-model="tempScore">
+                  </div>
+                  <div class="col-10">
+                    <label class=" ms-16 form-check-label col-11"
+                           :for="'radio_' + option.name">
+                      {{ option.text }}
+                    </label>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -137,7 +141,6 @@ export default {
       // 題庫
       quizModalData: [
         {
-          title: '第一題',
           id: 'quiz-1',
           quiz: '1. 請問您的羽球年資有多少經驗呢？',
           next: '#quiz-2',
@@ -160,12 +163,11 @@ export default {
             {
               name: 'option4',
               text: '經驗老道的五年以上',
-              value: 9,
+              value: 7,
             },
           ],
         },
         {
-          title: '第二題',
           id: 'quiz-2',
           quiz: '2. 您平常進行羽球活動的頻率為何？',
           pre: '#quiz-1',
@@ -173,8 +175,8 @@ export default {
           option: [
             {
               name: 'option1',
-              text: '開玩笑，每天打啊，不打會不舒服啊！',
-              value: 5,
+              text: '哎呀，我打球時間其實沒有固定說...',
+              value: 1,
             },
             {
               name: 'option2',
@@ -188,13 +190,12 @@ export default {
             },
             {
               name: 'option4',
-              text: '哎呀，我打球時間其實沒有固定說...',
-              value: 1,
+              text: '開玩笑，每天打啊，不打會不舒服啊！',
+              value: 5,
             },
           ],
         },
         {
-          title: '第三題',
           id: 'quiz-3',
           quiz: '3. 最想在羽球上面有所進步的技巧是什麼呢?',
           pre: '#quiz-2',
@@ -228,7 +229,6 @@ export default {
           ],
         },
         {
-          title: '第四題',
           id: 'quiz-4',
           quiz: '4. 平常有上過羽球教練課嗎？',
           pre: '#quiz-3',
@@ -262,7 +262,6 @@ export default {
           ],
         },
         {
-          title: '第五題',
           id: 'quiz-5',
           quiz: '5. 通常都參與什麼樣的羽球活動呢？',
           pre: '#quiz-4',
@@ -296,7 +295,6 @@ export default {
           ],
         },
         {
-          title: '第六題',
           id: 'quiz-6',
           quiz: '6. 在這項運動當中你有什麼樣的目標呢？',
           pre: '#quiz-5',
@@ -330,7 +328,6 @@ export default {
           ],
         },
         {
-          title: '第七題',
           id: 'quiz-7',
           quiz: '7. 你知道羽球場地的線都是什麼意思嗎？',
           pre: '#quiz-6',
@@ -359,7 +356,6 @@ export default {
           ],
         },
         {
-          title: '第八題',
           id: 'quiz-8',
           quiz: '8. 在場地底線的位置，能有辦法打到對面的場地一半嗎？',
           pre: '#quiz-7',
@@ -393,7 +389,6 @@ export default {
           ],
         },
         {
-          title: '第九題',
           id: 'quiz-9',
           quiz: '9. 請問你是用什麼方式發球呢？',
           pre: '#quiz-8',
@@ -417,7 +412,6 @@ export default {
           ],
         },
         {
-          title: '第十題',
           id: 'quiz-10',
           quiz: '10. 請問你發球的大概成功率有多少呢？',
           pre: '#quiz-9',
@@ -446,7 +440,6 @@ export default {
           ],
         },
         {
-          title: '第十一題',
           id: 'quiz-11',
           quiz: '11. 你知道球拍正確的握法嗎？',
           pre: '#quiz-10',
@@ -475,7 +468,6 @@ export default {
           ],
         },
         {
-          title: '第十二題',
           id: 'quiz-12',
           quiz: '12. 你在球場上移動的方式大概是什麼感覺呢？',
           pre: '#quiz-11',
@@ -504,7 +496,6 @@ export default {
           ],
         },
         {
-          title: '第十三題',
           id: 'quiz-13',
           quiz: '13. 你知道什麼是輪轉嗎？',
           pre: '#quiz-12',
@@ -538,7 +529,6 @@ export default {
           ],
         },
         {
-          title: '第十四題',
           id: 'quiz-14',
           quiz: '14. 你的球路武器有哪些呢？',
           pre: '#quiz-13',
@@ -572,7 +562,6 @@ export default {
           ],
         },
         {
-          title: '第十五題',
           id: 'quiz-15',
           quiz: '15. 你的反拍大概的情況如何？',
           pre: '#quiz-14',
@@ -606,7 +595,6 @@ export default {
           ],
         },
         {
-          title: '第十六題',
           id: 'quiz-16',
           quiz: '16. 你對於要把球打到哪裡去有概念嗎？',
           pre: '#quiz-15',
@@ -640,7 +628,6 @@ export default {
           ],
         },
         {
-          title: '第十七題',
           id: 'quiz-17',
           quiz: '17. 關於防守，你可以怎麼執行呢？',
           pre: '#quiz-16',
@@ -674,7 +661,6 @@ export default {
           ],
         },
         {
-          title: '第十八題',
           id: 'quiz-18',
           quiz: '18. 你有辦法好好控制球的落點嗎？',
           pre: '#quiz-17',

@@ -18,18 +18,21 @@
         <table class="table align-middle text-white my-48">
             <thead>
               <tr>
-                <th>品名</th>
+                <th>日期</th>
+                <th>球團</th>
                 <th style="width: 120px">數量</th>
-                <th>單價</th>
                 <th>總計</th>
-                <th>刪除產品</th>
+                <th>取消</th>
               </tr>
             </thead>
             <tbody>
               <template v-if="carts">
                 <tr v-for="item in carts.carts" :key="item.id">
-                  <td> {{ item.product.title }}
-                    <h6 class="text-success" v-if="item.coupon">已套用優惠券</h6>
+                  <td>
+                    {{ item.product.date }}
+                  </td>
+                  <td>
+                    {{ item.product.title }}
                   </td>
                   <td>
                     <label for="item-qty" class="d-none">數量</label>
@@ -46,16 +49,11 @@
                         </div>
                   </td>
                   <td>
-                    {{ $filters.currency(item.product.price) }}
-                  </td>
-                  <td>
-                    <small v-if="final_total !== total" class="text-success">折扣價</small>
-                    <br>
                     {{ $filters.currency(item.final_total) }}
                   </td>
                   <td>
                     <button
-                    class="btn btn-outline-white p-8"
+                    class="btn btn-outline-light"
                     @click="removeCartItem(item.id)">
                       <i class="bi bi-trash3"></i>
                     </button>
@@ -67,10 +65,6 @@
               <tr>
                 <td colspan="4" class="text-end">總計</td>
                 <td class="text-end">{{ $filters.currency(carts.total) }}</td>
-              </tr>
-              <tr>
-                <td colspan="4" class="text-end">折扣價</td>
-                <td class="text-end"> {{ $filters.currency(carts.final_total) }} </td>
               </tr>
             </tfoot>
           </table>

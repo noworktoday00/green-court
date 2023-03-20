@@ -102,7 +102,7 @@ export default {
       }
       this.isNew = isNew;
       // 用 $refs 把 productModal 綁進來
-      const { productComponent } = this.$refs.productModal;
+      const productComponent = this.$refs.productModal;
       // 執行內層函式
       productComponent.showModal();
     },
