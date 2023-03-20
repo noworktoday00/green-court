@@ -42,19 +42,19 @@
             </div>
             <div class="modal-body px-48">
               {{ item.quiz }}
-              <ul class="list-unstyled mt-24" v-for="option in item.option" :key="option.value + 1">
+              <ul class="list-unstyled mt-24" v-for="option in item.option" :key="option.value">
                 <li class="row">
                   <div class="col-1">
                     <input class="form-check-input"
                            type="radio"
                            :name="item.id"
-                           :id="'radio_' + option.name"
+                           :id="option.value"
                            :value="option.value"
                            v-model="tempScore">
                   </div>
                   <div class="col-10">
                     <label class=" ms-16 form-check-label col-11"
-                           :for="'radio_' + option.name">
+                           :for="option.value">
                       {{ option.text }}
                     </label>
                   </div>
