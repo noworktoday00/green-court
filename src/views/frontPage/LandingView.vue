@@ -148,18 +148,23 @@
           無論攻擊系，防禦系或者全能王者，都能找到適合的球拍！
         </p>
         <div class="racket-card row row-cols-1 row-cols-md-5">
-          <div class="p-16 p-md-8" v-for="item in recketsSelect" :key="item.id">
-              <div class="card">
+          <div class="p-16 p-md-8" v-for="item in racketsSelect" :key="item.id">
+              <div class="card card-opacity h-100">
               <img :src="item.imageUrl" class="card-img-top" alt="">
-              <div class="card-body">
-                <h5 class="card-title">球拍名稱名稱名稱名稱</h5>
+              <div class="card-body text-center text-white">
+                <h5 class="card-title">{{ item.title }}</h5>
                 <ul class="card-text list-unstyled">
-                  <li class="fs-4">球拍品牌</li>
-                  <li class="fs-3">球拍價格</li>
+                  <li class="fs-6"> {{ item.description }}</li>
+                  <li class="fs-3">NT$ {{ item.price }}</li>
                 </ul>
-                <a href="#" alt="" class="btn btn-primary" @click.prevent="showDetail(item.id)">
-                  Go somewhere
-                </a>
+                <div class="d-grid">
+                  <a href="#" alt=""
+                     class="btn btn-outline-primary"
+                     @click.prevent="showDetail(item.id)"
+                     >
+                    查看球拍詳情
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -204,7 +209,7 @@ export default {
       coaches: [],
       coachesSelect: [],
       rackets: [],
-      recketsSelect: [],
+      racketsSelect: [],
       isLoading: false,
     };
   },
@@ -227,9 +232,9 @@ export default {
           });
           this.activitiesSelect = this.activities.slice(0, 3);
           this.coachesSelect = this.coaches.slice(0, 4);
-          this.recketsSelect = this.rackets.slice(0, 5);
+          this.racketsSelect = this.rackets.slice(0, 5);
           this.isLoading = false;
-          console.log(this.activitiesSelect);
+          console.log(this.racketsSelect);
         });
     },
     showDetail(id) {

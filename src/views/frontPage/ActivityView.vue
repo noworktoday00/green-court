@@ -87,6 +87,7 @@
 
 <script>
 import ProductBanner from '@/components/ProductBanner.vue';
+import emitter from '@/methods/emitter';
 
 export default {
   components: {
@@ -146,6 +147,7 @@ export default {
         .then((res) => {
           this.status.loadingItem = '';
           // console.log(res);
+          emitter.emit('get-cart');
           this.$httpMessageState(res, '加入購物車');
         });
     },

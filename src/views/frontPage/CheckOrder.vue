@@ -6,7 +6,7 @@
         <table class="table align-middle text-white">
           <thead>
             <th>日期</th>
-            <th>品名</th>
+            <th>活動名稱</th>
             <th>人數</th>
             <th>單價</th>
           </thead>

@@ -37,45 +37,6 @@
             ref="fileInput"
             @change="uploadFile">
           </div>
-          <!-- 延伸技巧，多圖 -->
-          <!-- <div class="mt-16" v-if="Array.isArray(tempProduct.imagesUrl)">
-            <div class="mb-8 input-group"
-                  v-for="(img, key) in tempProduct.imagesUrl"
-                  :key="key + '135'">
-              <input type="url" class="form-control form-control"
-                      placeholder="請輸入連結" v-model="tempProduct.imagesUrl[key]">
-              <button type="button" class="btn btn-outline-danger">
-                移除
-              </button>
-              <img :src="tempProduct.imagesUrl[key]" class="img-fluid" alt="">
-            </div>
-            <div>
-              <button class="btn btn-outline-primary btn-sm d-block w-100"
-                      v-if="!tempProduct.imagesUrl.length"
-                      @click="tempProduct.imagesUrl.push('')">
-                新增圖片
-              </button>
-            </div>
-          </div> -->
-          <div class="mt-8" v-if="tempProduct.images">
-            <div v-for="(image, key) in tempProduct.images" class="mb-3 input-group" :key="key">
-              <input
-                type="url"
-                class="form-control form-control"
-                v-model="tempProduct.images[key]"
-                placeholder="請輸入連結"/>
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                @click="tempProduct.images.splice(key, 1)">移除</button>
-            </div>
-            <div v-if="
-              tempProduct.images[tempProduct.images.length - 1] || !tempProduct.images.length">
-              <button
-                class="btn btn-outline-primary btn-sm d-block w-100"
-                @click="tempProduct.images.push('')">新增圖片</button>
-            </div>
-        </div>
         </div>
         <div class="col-sm-8">
           <!-- 標題 & 分類 -->

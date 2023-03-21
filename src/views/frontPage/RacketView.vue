@@ -5,28 +5,26 @@
     <div class="container">
       <div class="row row-cols-md-4">
         <div class="p-16" v-for="product in testProducts" :key="product.id">
-            <div class="card text-white">
-              <img :src="product.imageUrl"
-                   class="card-img-top"
-                   alt=""
-                   style="height:200px;background-size:cover ">
+            <div class="card card-opacity text-white">
+              <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
+                       class="card-img-top" alt=""
+                       style="height:250px;background-size:cover"></div>
               <div class="card-body">
                 <h5 class="card-title"> {{ product.title }} </h5>
-                <ul>
-                  <li>時間：{{ product.time }} {{  product.unit}}</li>
-                  <li>地點：{{ product.location }}</li>
-                  <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>
-                  <li>費用： {{ product.price }}</li>
+                <ul class="list-unstyled">
+                  <li>品牌： {{  product.description}}</li>
+                  <li>原價：{{ product.origin_price }}</li>
+                  <li>特價： {{ product.price }}</li>
                 </ul>
                 <div class="row">
                   <div class="btn-group">
                     <button
-                    class="btn btn-outline-light"
+                    class="btn btn-outline-primary"
                     @click="showDetail(product.id)">
                     查看更多
                   </button>
                     <button
-                    class="btn btn-outline-danger"
+                    class="btn btn-outline-secondary"
                     @click="addToCart(product.id)"
                     :disabled="this.status.loadingItem === product.id">
                     <div class="spinner-border spinner-border-sm"
@@ -47,6 +45,7 @@
 
 <script>
 import ProductBanner from '@/components/ProductBanner.vue';
+import emitter from '@/methods/emitter';
 
 export default {
   components: {
@@ -73,7 +72,6 @@ export default {
           this.products.forEach((item) => {
             if (item.category === '羽球拍') {
               this.testProducts.push(item);
-              console.log(this.testProducts);
             }
           });
           this.isLoading = false;
@@ -92,7 +90,7 @@ export default {
       this.$http.post(api, { data: cart })
         .then((res) => {
           this.status.loadingItem = '';
-          console.log(res);
+          emitter.emit('get-cart');
           this.$httpMessageState(res, '加入購物車');
         });
     },

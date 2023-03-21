@@ -68,7 +68,8 @@
             href="#offcanvasExample"
             role="button"
             aria-controls="offcanvasExample">
-            <i class="bi bi-calendar2-week text-white"></i>
+            <i class="bi bi-calendar2-week text-white position-relative">
+            </i>
             </a>
           </li>
           <li class="nav-item">

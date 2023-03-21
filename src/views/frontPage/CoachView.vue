@@ -132,6 +132,7 @@
 <script>
 import ProductBanner from '@/components/ProductBanner.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import emitter from '@/methods/emitter';
 
 import 'swiper/swiper.css';
 
@@ -194,6 +195,7 @@ export default {
         .then((res) => {
           this.status.loadingItem = '';
           console.log(res);
+          emitter.emit('get-cart');
           this.$httpMessageState(res, '加入購物車');
         });
     },

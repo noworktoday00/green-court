@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading" />
     <div class="offcanvas offcanvas-end bg-dark text-white"
        tabindex="-1" id="offcanvasExample"
        aria-labelledby="offcanvasExampleLabel"
@@ -19,15 +20,14 @@
             <thead>
               <tr>
                 <th>日期</th>
-                <th>球團</th>
+                <th>球團名稱</th>
                 <th style="width: 120px">數量</th>
-                <th>總計</th>
                 <th>取消</th>
               </tr>
             </thead>
             <tbody>
-              <template v-if="carts">
-                <tr v-for="item in carts.carts" :key="item.id">
+              <template v-if="activitiesCart.length > 1">
+                <tr v-for="item in activitiesCart" :key="item.id">
                   <td>
                     {{ item.product.date }}
                   </td>
@@ -49,6 +49,45 @@
                         </div>
                   </td>
                   <td>
+                    <button
+                    class="btn btn-outline-light"
+                    @click="removeCartItem(item.id)">
+                      <i class="bi bi-trash3"></i>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+              <template v-else>
+                  您尚未參加活動
+              </template>
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+      </div>
+      <div>
+        <table class="table align-middle text-white my-48">
+            <thead>
+              <tr>
+                <th>品牌</th>
+                <th>產品名稱</th>
+                <th style="width: 120px">數量</th>
+                <th>取消</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-if="racketCart.length > 1">
+                <tr v-for="item in racketCart" :key="item.id">
+                  <td>
+                    {{ item.product.description }}
+                  </td>
+                  <td>
+                    {{ item.product.title }}
+                  </td>
+                  <td>
+                    {{ item.qty }}
+                  </td>
+                  <td>
                     {{ $filters.currency(item.final_total) }}
                   </td>
                   <td>
@@ -60,17 +99,11 @@
                   </td>
                 </tr>
               </template>
+              <template v-else>您尚未選購球拍</template>
             </tbody>
             <tfoot>
-              <tr>
-                <td colspan="4" class="text-end">總計</td>
-                <td class="text-end">{{ $filters.currency(carts.total) }}</td>
-              </tr>
             </tfoot>
           </table>
-      </div>
-      <div>
-        球拍 table
       </div>
       <div class="d-grid">
         <router-link to="/cart" class="btn btn-outline-light"
@@ -84,17 +117,21 @@
 
 <script>
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
+import emitter from '@/methods/emitter';
 
 export default {
   data() {
     return {
       offcanvas: {},
       carts: {},
+      activitiesCart: [],
+      racketCart: [],
       final_total: '',
       total: '',
       status: {
         loadingItem: '',
       },
+      isLoading: false,
     };
   },
   methods: {
@@ -103,27 +140,24 @@ export default {
       this.isLoading = true;
       this.$http.get(url)
         .then((res) => {
-          this.isLoading = false;
-          this.carts = res.data.data;
-          console.log(this.carts);
+          this.carts = res.data.data.carts;
+          this.carts.forEach((item) => {
+            if (item.product.category === '臨打團') {
+              this.activitiesCart.push(item);
+              console.log(this.activitiesCart);
+            }
+            if (item.product.category === '教練課') {
+              this.activitiesCart.push(item);
+              console.log(this.activitiesCart);
+            }
+            if (item.product.category === '羽球拍') {
+              this.racketCart.push(item);
+              // console.log(this.racketCart);
+            }
+          });
           this.final_total = res.data.data.final_total;
           this.total = res.data.data.total;
-        });
-    },
-    changeQty(item) {
-      // console.log(item);
-      this.status.loadingItem = item.id;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
-      const cartInfo = {
-        product_id: item.product_id,
-        qty: item.qty,
-      };
-      // console.log(cartInfo);
-      this.$http.put(url, { data: cartInfo })
-        .then((res) => {
-          this.status.loadingItem = '';
-          this.$httpMessageState(res, '更新數量');
-          this.getCart();
+          this.isLoading = false;
         });
     },
     removeCartItem(id) {
@@ -132,6 +166,8 @@ export default {
         .then((res) => {
           // console.log(res);
           this.$httpMessageState(res, '刪除品項');
+          this.activitiesCart = [];
+          this.racketCart = [];
           this.getCart();
         });
     },
@@ -147,6 +183,9 @@ export default {
   },
   mounted() {
     this.offcanvas = new Offcanvas(this.$refs.offcanvas);
+    emitter.on('get-cart', () => {
+      this.getCart();
+    });
   },
 };
 </script>

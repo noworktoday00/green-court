@@ -3,7 +3,7 @@
   <div class="text-end mt-16">
     <button class="btn btn-primary" @click="openCouponModal(true)">建立新的酷碰券</button>
   </div>
-  <table class="table mt-16">
+  <table class="table mt-16 text-white">
     <thead>
       <tr>
         <th>名稱</th>
@@ -19,13 +19,13 @@
         <td> {{ coupon.percent }} % </td>
         <td> {{ $filters.date(coupon.due_date) }} </td>
         <td>
-          <span v-if="coupon.is_enabled === 1" class="text-success">啟用</span>
-          <span v-else class="text-muted">未啟用</span>
+          <span v-if="coupon.is_enabled === 1" class="text-white">啟用</span>
+          <span v-else class="text-warning">未啟用</span>
         </td>
         <td>
           <div class="btn-group">
             <button
-            class="btn btn-outline-primary btn-sm"
+            class="btn btn-outline-light btn-sm"
             @click="openCouponModal(false, coupon)">編輯</button>
             <button class="btn btn-outline-danger btn-sm"
             @click="openDeleteModal(coupon)">刪除</button>
