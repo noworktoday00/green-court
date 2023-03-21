@@ -5,49 +5,10 @@
     <div class="container py-24">
       <div v-if="!levelMatchProducts.length == 0">
         <p class="fs-3 text-white text-center">可能適合您的教練</p>
-        <!-- <div class="row row-cols-md-4">
-          <div class="p-16" v-for="product in levelMatchProducts" :key="product.id">
-              <div class="card card-opacity text-white">
-                <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
-                       class="card-img-top" alt=""
-                       style="height:250px;background-size:cover"></div>
-                <div class="card-body">
-                  <h5 class="card-title"> {{ product.title }} </h5>
-                  <ul class="list-unstyled">
-                    <li>時間：{{ product.time }} {{  product.unit}}</li>
-                    <li>地點：{{ product.location }}</li>
-                    <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>
-                    <li>費用： {{ product.price }}</li>
-                  </ul>
-                  <div class="row">
-                    <div class="btn-group">
-                      <button
-                      class="btn btn-outline-primary"
-                      @click="showDetail(product.id)">
-                      查看更多
-                    </button>
-                      <button
-                      class="btn btn-outline-secondary"
-                      @click="addToCart(product.id)"
-                      :disabled="this.status.loadingItem === product.id">
-                      <div class="spinner-border spinner-border-sm"
-                      role="status" v-if="this.status.loadingItem === product.id">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
-                      我要上課
-                    </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div> -->
-        <swiper
-          :slides-per-view="4"
-          :space-between="50"
-          @swiper="onSwiper"
-          @slideChange="onSlideChange"
-        >
+        <swiper :breakpoints="swiperOptions.breakpoints"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+                >
           <swiper-slide v-for="product in levelMatchProducts" :key="product.id">
             <div class="card card-opacity text-white">
                 <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
@@ -87,43 +48,46 @@
       </div>
       <div class="my-48">
         <p class="fs-3 text-white text-center">所有教練</p>
-        <div class="row row-cols-md-4">
-          <div class="p-16" v-for="product in testProducts" :key="product.id">
+        <swiper :breakpoints="swiperOptions.breakpoints"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+                >
+          <swiper-slide v-for="product in testProducts" :key="product.id">
               <div class="card card-opacity text-white">
-                <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
-                       class="card-img-top" alt=""
-                       style="height:250px;background-size:cover"></div>
-                <div class="card-body">
-                  <h5 class="card-title"> {{ product.title }} </h5>
-                  <ul class="list-unstyled">
-                    <li>時間：{{ product.time }} {{  product.unit}}</li>
-                    <li>地點：{{ product.location }}</li>
-                    <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>
-                    <li>費用： {{ product.price }}</li>
-                  </ul>
-                  <div class="row">
-                    <div class="btn-group">
-                      <button
-                      class="btn btn-outline-primary"
-                      @click="showDetail(product.id)">
-                      查看更多
-                    </button>
-                      <button
-                      class="btn btn-outline-secondary"
-                      @click="addToCart(product.id)"
-                      :disabled="this.status.loadingItem === product.id">
-                      <div class="spinner-border spinner-border-sm"
-                      role="status" v-if="this.status.loadingItem === product.id">
-                        <span class="visually-hidden">Loading...</span>
+                  <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
+                        class="card-img-top" alt=""
+                        style="height:250px;background-size:cover"></div>
+                  <div class="card-body">
+                    <h5 class="card-title"> {{ product.title }} </h5>
+                    <ul class="list-unstyled">
+                      <li>時間：{{ product.time }} {{  product.unit}}</li>
+                      <li>地點：{{ product.location }}</li>
+                      <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>
+                      <li>費用： {{ product.price }}</li>
+                    </ul>
+                    <div class="row">
+                      <div class="btn-group">
+                        <button
+                        class="btn btn-outline-primary"
+                        @click="showDetail(product.id)">
+                        查看更多
+                      </button>
+                        <button
+                        class="btn btn-outline-secondary"
+                        @click="addToCart(product.id)"
+                        :disabled="this.status.loadingItem === product.id">
+                        <div class="spinner-border spinner-border-sm"
+                        role="status" v-if="this.status.loadingItem === product.id">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                        參加球團
+                      </button>
                       </div>
-                      我要上課
-                    </button>
                     </div>
                   </div>
                 </div>
-              </div>
-          </div>
-        </div>
+          </swiper-slide>
+        </swiper>
       </div>
     </div>
   </div>
@@ -152,6 +116,22 @@ export default {
       isLoading: false,
       status: {
         loadingItem: '',
+      },
+      swiperOptions: {
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 48,
+          },
+          770: {
+            slidesPerView: 3,
+            spaceBetween: 48,
+          },
+          771: {
+            slidesPerView: 5,
+            spaceBetween: 16,
+          },
+        },
       },
     };
   },

@@ -2,7 +2,8 @@
   <Loading :active="isLoading" />
   <ProductBanner />
   <div class="gradient-bg">
-    <div class="container">
+    <div class="container py-48">
+      <p class="fs-3 text-white text-center">羽球拍</p>
       <div class="row row-cols-md-4">
         <div class="p-16" v-for="product in testProducts" :key="product.id">
             <div class="card card-opacity text-white">

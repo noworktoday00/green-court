@@ -5,9 +5,12 @@
     <div class="container py-24">
       <div v-if="!levelMatchProducts.length == 0">
         <p class="fs-3 text-white text-center">等級媒合球團</p>
-        <div class="row row-cols-md-4">
-          <div class="p-16" v-for="product in levelMatchProducts" :key="product.id">
-              <div class="card card-opacity text-white">
+        <swiper :breakpoints="swiperOptions.breakpoints"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+                >
+          <swiper-slide v-for="product in levelMatchProducts" :key="product.id">
+            <div class="card card-opacity text-white">
                 <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
                        class="card-img-top" alt=""
                        style="height:250px;background-size:cover"></div>
@@ -40,58 +43,66 @@
                   </div>
                 </div>
               </div>
-          </div>
-        </div>
+          </swiper-slide>
+        </swiper>
       </div>
       <p class="fs-3 text-white text-center">全部球團</p>
-      <div class="row row-cols-md-4">
-        <div class="p-16" v-for="product in testProducts" :key="product.id">
+      <swiper :breakpoints="swiperOptions.breakpoints"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+                >
+          <swiper-slide v-for="product in testProducts" :key="product.id">
             <div class="card card-opacity text-white">
-              <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
-                     class="card-img-top" alt=""
-                     style="height:250px;background-size:cover"></div>
-              <div class="card-body">
-                <h5 class="card-title"> {{ product.title }} </h5>
-                <ul class="list-unstyled">
-                  <li>時間：{{ product.time }} {{  product.unit}}</li>
-                  <li>地點：{{ product.location }}</li>
-                  <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>
-                  <li>費用： {{ product.price }}</li>
-                </ul>
-                <div class="row">
-                  <div class="btn-group">
-                    <button
-                    class="btn btn-outline-primary"
-                    @click="showDetail(product.id)">
-                    查看更多
-                  </button>
-                    <button
-                    class="btn btn-outline-secondary"
-                    @click="addToCart(product.id)"
-                    :disabled="this.status.loadingItem === product.id">
-                    <div class="spinner-border spinner-border-sm"
-                    role="status" v-if="this.status.loadingItem === product.id">
-                      <span class="visually-hidden">Loading...</span>
+                <div :style="{backgroundImage: 'url(' + product.imageUrl + ')'}"
+                       class="card-img-top" alt=""
+                       style="height:250px;background-size:cover"></div>
+                <div class="card-body">
+                  <h5 class="card-title"> {{ product.title }} </h5>
+                  <ul class="list-unstyled">
+                    <li>時間：{{ product.time }} {{  product.unit}}</li>
+                    <li>地點：{{ product.location }}</li>
+                    <li>等級： {{ product.level - 1 }}~{{ product.level + 1 }}</li>
+                    <li>費用： {{ product.price }}</li>
+                  </ul>
+                  <div class="row">
+                    <div class="btn-group">
+                      <button
+                      class="btn btn-outline-primary"
+                      @click="showDetail(product.id)">
+                      查看更多
+                    </button>
+                      <button
+                      class="btn btn-outline-secondary"
+                      @click="addToCart(product.id)"
+                      :disabled="this.status.loadingItem === product.id">
+                      <div class="spinner-border spinner-border-sm"
+                      role="status" v-if="this.status.loadingItem === product.id">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                      參加球團
+                    </button>
                     </div>
-                    參加球團
-                  </button>
                   </div>
                 </div>
               </div>
-            </div>
-        </div>
-      </div>
+          </swiper-slide>
+        </swiper>
     </div>
   </div>
 </template>
 
 <script>
 import ProductBanner from '@/components/ProductBanner.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import emitter from '@/methods/emitter';
+
+import 'swiper/swiper.css';
 
 export default {
   components: {
     ProductBanner,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
@@ -103,6 +114,22 @@ export default {
       isLoading: false,
       status: {
         loadingItem: '',
+      },
+      swiperOptions: {
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 16,
+          },
+          770: {
+            slidesPerView: 3,
+            spaceBetween: 48,
+          },
+          771: {
+            slidesPerView: 4,
+            spaceBetween: 32,
+          },
+        },
       },
     };
   },

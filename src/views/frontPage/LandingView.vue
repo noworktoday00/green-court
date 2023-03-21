@@ -147,7 +147,32 @@
           綠場也提供各式球具，協助您提升裝備，
           無論攻擊系，防禦系或者全能王者，都能找到適合的球拍！
         </p>
-        <div class="racket-card row row-cols-1 row-cols-md-5">
+        <swiper :breakpoints="swiperOptions.breakpoints"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+                >
+          <swiper-slide v-for="item in racketsSelect" :key="item.id">
+            <div class="card card-opacity h-100">
+              <img :src="item.imageUrl" class="card-img-top" alt="">
+              <div class="card-body text-center text-white">
+                <h5 class="card-title">{{ item.title }}</h5>
+                <ul class="card-text list-unstyled">
+                  <li class="fs-6"> {{ item.description }}</li>
+                  <li class="fs-3">NT$ {{ item.price }}</li>
+                </ul>
+                <div class="d-grid">
+                  <a href="#" alt=""
+                     class="btn btn-outline-primary"
+                     @click.prevent="showDetail(item.id)"
+                     >
+                    查看球拍詳情
+                  </a>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper>
+        <!-- <div class="racket-card row row-cols-1 row-cols-md-5">
           <div class="p-16 p-md-8" v-for="item in racketsSelect" :key="item.id">
               <div class="card card-opacity h-100">
               <img :src="item.imageUrl" class="card-img-top" alt="">
@@ -168,7 +193,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </section>
     </div>
   </div>
@@ -196,11 +221,16 @@
 <script>
 import LandingBanner from '@/components/LandingBanner.vue';
 import MiddleNavbar from '@/components/MiddleNavbar.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+import 'swiper/swiper.css';
 
 export default {
   components: {
     LandingBanner,
     MiddleNavbar,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
@@ -211,6 +241,22 @@ export default {
       rackets: [],
       racketsSelect: [],
       isLoading: false,
+      swiperOptions: {
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 16,
+          },
+          770: {
+            slidesPerView: 3,
+            spaceBetween: 48,
+          },
+          771: {
+            slidesPerView: 5,
+            spaceBetween: 16,
+          },
+        },
+      },
     };
   },
   methods: {
@@ -240,6 +286,18 @@ export default {
     showDetail(id) {
       this.$router.push(`/activities/${id}`);
     },
+  },
+  setup() {
+    const onSwiper = (swiper) => {
+      console.log(swiper);
+    };
+    const onSlideChange = () => {
+      console.log('slide change');
+    };
+    return {
+      onSwiper,
+      onSlideChange,
+    };
   },
   mounted() {
     this.getProducts();
