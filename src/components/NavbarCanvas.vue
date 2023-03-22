@@ -57,9 +57,7 @@
                   </td>
                 </tr>
               </template>
-              <template v-else>
-                  您尚未參加活動
-              </template>
+              <template v-else>您尚未參加活動</template>
             </tbody>
             <tfoot>
             </tfoot>
@@ -123,7 +121,7 @@ export default {
   data() {
     return {
       offcanvas: {},
-      carts: {},
+      carts: [],
       activitiesCart: [],
       racketCart: [],
       final_total: '',
@@ -136,38 +134,36 @@ export default {
   },
   methods: {
     getCart() {
+      this.carts = [];
+      this.activitiesCart = [];
+      this.racketCart = [];
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.isLoading = true;
       this.$http.get(url)
         .then((res) => {
           this.carts = res.data.data.carts;
-          this.carts.forEach((item) => {
-            if (item.product.category === '臨打團') {
-              this.activitiesCart.push(item);
-              console.log(this.activitiesCart);
-            }
-            if (item.product.category === '教練課') {
-              this.activitiesCart.push(item);
-              console.log(this.activitiesCart);
-            }
-            if (item.product.category === '羽球拍') {
-              this.racketCart.push(item);
-              // console.log(this.racketCart);
-            }
-          });
-          this.final_total = res.data.data.final_total;
-          this.total = res.data.data.total;
+          this.classification();
           this.isLoading = false;
         });
+    },
+    classification() {
+      this.carts.forEach((item) => {
+        if (item.product.category === '臨打團') {
+          this.activitiesCart.push(item);
+        }
+        if (item.product.category === '教練課') {
+          this.activitiesCart.push(item);
+        }
+        if (item.product.category === '羽球拍') {
+          this.racketCart.push(item);
+        }
+      });
     },
     removeCartItem(id) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http.delete(url)
         .then((res) => {
-          // console.log(res);
           this.$httpMessageState(res, '刪除品項');
-          this.activitiesCart = [];
-          this.racketCart = [];
           this.getCart();
         });
     },
