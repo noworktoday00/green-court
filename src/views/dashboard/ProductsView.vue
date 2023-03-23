@@ -79,9 +79,9 @@ export default {
   inject: ['emitter'],
   methods: {
     getProducts(page = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       this.isLoading = true;
-      this.$http.get(api)
+      this.$http.get(url)
         .then((res) => {
           // console.log(res);
           this.products = res.data.products;
@@ -115,13 +115,13 @@ export default {
     updateProduct(product) {
       this.tempProduct = product;
       const productComponent = this.$refs.productModal;
-      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
+      let url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
       let apiMethod = 'post';
       if (!this.isNew) {
-        api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${product.id}`;
+        url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${product.id}`;
         apiMethod = 'put';
       }
-      this.$http[apiMethod](api, { data: this.tempProduct })
+      this.$http[apiMethod](url, { data: this.tempProduct })
         .then((res) => {
           console.log(res);
           productComponent.hideModal();
@@ -133,8 +133,8 @@ export default {
     },
     deleteProduct() {
       const deleteComponent = this.$refs.deleteModal;
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
-      this.$http.delete(api)
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
+      this.$http.delete(url)
         .then((res) => {
           console.log(res);
           deleteComponent.hideModal();

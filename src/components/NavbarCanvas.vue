@@ -51,7 +51,7 @@
                   <td>
                     <button
                     class="btn btn-outline-light"
-                    @click="removeCartItem(item.id)">
+                    @click="removeCartItem(item.product.id)">
                       <i class="bi bi-trash3"></i>
                     </button>
                   </td>
@@ -165,6 +165,7 @@ export default {
         .then((res) => {
           this.$httpMessageState(res, '刪除品項');
           this.getCart();
+          console.log(res);
         });
     },
     showCanvas() {

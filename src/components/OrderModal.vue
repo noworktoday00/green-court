@@ -26,19 +26,19 @@
                 <tbody>
                   <tr>
                     <th>姓名</th>
-                    <td></td>
+                    <td>{{ order.user.name }}</td>
                   </tr>
                   <tr>
                     <th>Email</th>
-                    <td></td>
+                    <td>{{ order.user.email }}</td>
                   </tr>
                   <tr>
                     <th>電話</th>
-                    <td></td>
+                    <td>{{ order.user.tel }}</td>
                   </tr>
                   <tr>
                     <th>地址</th>
-                    <td></td>
+                    <td>{{ order.user.address }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -49,11 +49,11 @@
                 <tbody>
                   <tr>
                     <th>訂單編號</th>
-                    <td></td>
+                    <td>{{ order.id }}</td>
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td></td>
+                    <td>{{ $filters.date(order.create_at) }}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
@@ -98,7 +98,6 @@
 import modalMixin from '@/mixins/modalMixin';
 
 export default {
-  name: 'orderModal',
   data() {
     return {
       status: {},
